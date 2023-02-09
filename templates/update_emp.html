@@ -1,0 +1,132 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Add Employee Details</title>
+
+</head>
+
+<body
+  background="https://images.unsplash.com/photo-1488998427799-e3362cec87c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=200">
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">EMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'department' %}">Department</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'employee' %}">Employee</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout/">Logout</a>
+            </li>
+            <li class="nav-item"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br>
+  <br>
+  {% block body %}
+  <div class="container my-lg-5">
+    <form action="/update_emp/{{emp.id}}" method="post" class="row g-3 needs-validation" novalidate>
+      {% csrf_token %}
+
+      <div class="col-md-4 position-relative">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ emp.name }}" required>
+      </div>
+
+      <div class="col-md-4 position-relative">
+        <label for="phone_number" class="form-label">Phone No</label>
+        <input type="tel" class="form-control" id="phone_number" name="phone_number" value="{{ emp.phone_number }}" required>
+      </div>
+
+      <div class="col-md-4 position-relative">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ emp.email }}" required>
+      </div>
+      
+      <div class="col-md-6 position-relative">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" class="form-control" id="address" name="address" value="{{ emp.address }}"  required>
+      </div>
+
+      <div class="col-md-3 position-relative">
+        <label for="gender" class="form-label">Gender</label>
+    <select class="form-select" id="gender" name="gender" value="{{ emp.gender }}" required>
+          <option selected disabled value="">Choose...</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 position-relative">
+        <label for="dob" class="form-label">DOB</label>
+        <input type="date" class="form-control" id="dob" name="dob" value="{{ emp.dob }}" required>
+      </div>
+
+      <div class="col-md-3 position-relative">
+        <label for="date_hired" class="form-label">Joining Date</label>
+        <input type="date" class="form-control" id="date_hired" name="date_hired" value="{{ emp.date_hired }}"  required>
+      </div>
+
+      <div class="col-md-4 position-relative">
+        <label for="salary" class="form-label">Salary</label>
+        <input type="text" class="form-control" id="salary" name="salary" value="{{ emp.salary }}"  required>
+      </div>
+
+      <div class="col-md-4 position-relative">
+        <label for="position" class="form-label">Position</label>
+        <select class="form-select" id="position" name="position" value="{{ emp.position }}" required>
+          <option selected disabled>Choose...</option>
+          {% for p in pos %}
+          <option value="{{p.id}}">{{p.emp_position}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4 position-relative">
+        <label for="dept" class="form-label">Department</label>
+        <select class="form-select" id="gender" name="dept" value="{{ emp.dept }}" required>
+          <option selected disabled>Choose...</option>
+          {% for d in dpt %}
+          <option value="{{d.id}}">{{d.dept_name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit </button>
+      </div>
+      
+    </form>
+  </div>
+  {% endblock %}
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+
+</body>
+</html>

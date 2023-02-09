@@ -1,0 +1,87 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Employee Position</title>
+
+  </head>
+  <body background="https://images.unsplash.com/photo-1488998427799-e3362cec87c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=200" >
+    
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">EMS</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'department' %}">Department</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'employee' %}">Employee</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout/">Logout</a>
+                </li>
+                
+                
+                <li class="nav-item"></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      {% block body %}
+      
+      <div class="container my-lg-5">
+        <h1 >{{pos}} Positions </h1>
+        <table class="table text-center">
+          <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">names </th>
+                
+              </tr>
+            </thead>
+            <tbody class = "table-group-divider">
+                {% for empl in empl %}
+
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{empl.name}}</td>
+                
+               
+
+                {% endfor %}
+            </tbody>
+          </table>
+          {% endblock %}
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  </body>
+</html>
